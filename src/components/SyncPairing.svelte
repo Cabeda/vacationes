@@ -193,8 +193,14 @@
     step = 'scanning';
     error = null;
     
-    await tick();
-    await tick();
+    for (let i = 0; i < 10; i++) {
+      await tick();
+      const el = document.getElementById('qr-reader');
+      if (el) {
+        scannerElement = el;
+        break;
+      }
+    }
     
     if (!scannerElement) {
       error = 'Camera element not found';
@@ -204,6 +210,7 @@
     
     try {
       const { Html5Qrcode } = await import('html5-qrcode');
+      
       html5QrCodeScanner = new Html5Qrcode('qr-reader');
       
       await html5QrCodeScanner.start(
@@ -215,10 +222,12 @@
         (decodedText) => {
           handleScannedQR(decodedText);
         },
-        () => {}
+        (err) => {
+          console.error('QR Scan Error:', err);
+        }
       );
     } catch (err) {
-      error = err instanceof Error ? err.message : 'Failed to start camera';
+      error = err instanceof Error ? err.message : 'Failed to start camera. Please ensure camera permissions are granted.';
       step = 'idle';
     }
   }
