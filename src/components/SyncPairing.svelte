@@ -186,6 +186,7 @@
     return QRCode.toDataURL(data, {
       width: 256,
       margin: 2,
+      errorCorrectionLevel: 'M',
       color: {
         dark: '#000000',
         light: '#ffffff'
@@ -221,7 +222,11 @@
       console.log('Starting camera...');
       
       await html5QrCodeScanner.start(
-        { facingMode: 'environment' },
+        { 
+          facingMode: 'environment',
+          width: { ideal: 640 },
+          height: { ideal: 480 }
+        },
         {
           fps: 10,
           qrbox: { width: 200, height: 200 }
