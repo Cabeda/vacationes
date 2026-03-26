@@ -76,6 +76,8 @@
       });
       
       sdpOffer = JSON.stringify(peerConnection.localDescription);
+      // eslint-disable-next-line no-console
+      console.log('Generated QR content:', sdpOffer);
       qrCodeUrl = await generateQRDataUrl(sdpOffer);
       step = 'waiting-scan';
       
@@ -86,6 +88,8 @@
   }
   
   async function handleScannedQR(result: string) {
+    // eslint-disable-next-line no-console
+    console.log('Scanned QR content:', result);
     if (!scannerElement) {return;}
     
     try {
@@ -96,7 +100,7 @@
       } else if (parsed.type === 'answer') {
         await handleAnswerScanned(parsed);
       } else {
-        error = 'Invalid QR code format';
+        error = `Invalid QR code format: ${JSON.stringify(parsed)}`;
       }
     } catch (err) {
       error = err instanceof Error ? err.message : 'Failed to process QR code';
@@ -220,11 +224,11 @@
           qrbox: { width: 250, height: 250 }
         },
         (decodedText) => {
+          // eslint-disable-next-line no-console
+          console.log('QR Code detected:', decodedText);
           handleScannedQR(decodedText);
         },
-        (err) => {
-          console.error('QR Scan Error:', err);
-        }
+        () => {}
       );
     } catch (err) {
       error = err instanceof Error ? err.message : 'Failed to start camera. Please ensure camera permissions are granted.';
