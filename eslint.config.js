@@ -35,7 +35,9 @@ export default [
         TextEncoder: 'readonly',
         TextDecoder: 'readonly',
         RTCSessionDescriptionInit: 'readonly',
-        RTCIceCandidateInit: 'readonly'
+        RTCIceCandidateInit: 'readonly',
+        PointerEvent: 'readonly',
+        URLSearchParams: 'readonly'
       }
     },
     rules: {

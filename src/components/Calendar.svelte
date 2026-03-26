@@ -119,7 +119,7 @@
     if (day) dragEnd = day;
   }
 
-  function handleGridPointerUp(e: PointerEvent) {
+  function handleGridPointerUp(_e: PointerEvent) {
     if (!isDragging) return;
     commitSelection();
   }
