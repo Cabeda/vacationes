@@ -1,9 +1,10 @@
 import { Repo, type DocHandle, isValidAutomergeUrl } from '@automerge/automerge-repo';
-import { IndexedDBStorageAdapter } from '@automerge/automerge-repo-storage-indexeddb';
 import { BroadcastChannelNetworkAdapter } from '@automerge/automerge-repo-network-broadcastchannel';
+import { IndexedDBStorageAdapter } from '@automerge/automerge-repo-storage-indexeddb';
 import { writable, type Writable } from 'svelte/store';
-import type { VacationesDoc } from './types';
+
 import { DEFAULT_LEAVE_TYPES } from './leave-defaults';
+import type { VacationesDoc } from './types';
 import { generateId } from './utils';
 
 const STORAGE_KEY = 'vacationes-doc-url';
@@ -57,7 +58,7 @@ export function createInitialDoc(): VacationesDoc {
 
 export async function initializeDoc(): Promise<void> {
   // Already initialized — return immediately (idempotent)
-  if (handle) return;
+  if (handle) {return;}
 
   const r = getRepo();
   const savedUrl = localStorage.getItem(STORAGE_KEY);
@@ -78,7 +79,8 @@ export async function initializeDoc(): Promise<void> {
 
   // Push initial state
   const current = handle.doc();
-  if (current) vacationesDoc.set(current);
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  if (current) {vacationesDoc.set(current);}
 
   // Subscribe to future changes
   handle.on('change', ({ doc }) => {

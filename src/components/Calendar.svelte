@@ -1,9 +1,10 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
-  import { locale } from '$lib/i18n';
   import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+
   import { vacationesDoc, initializeDoc } from '$lib/automerge';
   import { getHolidaysForYear } from '$lib/holidays';
+  import { locale } from '$lib/i18n';
   import type { Entry, Holiday } from '$lib/types';
   import {
     getMonthDays,
@@ -13,6 +14,7 @@
     isWeekend,
     isHoliday
   } from '$lib/utils';
+
   import DayCell from './DayCell.svelte';
   
   let currentYear = $state(new Date().getFullYear());
@@ -25,7 +27,7 @@
   let dragEnd = $state<Date | null>(null);
   let isDragging = $state(false);
   
-  let doc = $derived($vacationesDoc);
+  const doc = $derived($vacationesDoc);
   
   onMount(async () => {
     await initializeDoc();
@@ -38,7 +40,7 @@
   });
   
   async function loadHolidays() {
-    if (!doc) return;
+    if (!doc) {return;}
     const profileIds = Object.keys(doc.profiles);
     const municipality = profileIds.length > 0 ? doc.profiles[profileIds[0]].municipality : 'Lisboa';
     const cachedHolidays = doc.holidays || {};
@@ -47,12 +49,12 @@
   
   function prevMonth() {
     if (currentMonth === 0) { currentMonth = 11; currentYear--; }
-    else currentMonth--;
+    else {currentMonth--;}
   }
   
   function nextMonth() {
     if (currentMonth === 11) { currentMonth = 0; currentYear++; }
-    else currentMonth++;
+    else {currentMonth++;}
   }
   
   function goToToday() {
@@ -62,7 +64,7 @@
   }
   
   function getEntriesForDay(day: Date): Entry[] {
-    if (!doc) return [];
+    if (!doc) {return [];}
     const dayStr = formatDate(day);
     return Object.values(doc.entries).filter(entry =>
       dayStr >= entry.startDate && dayStr <= entry.endDate
@@ -83,7 +85,7 @@
   // --- Drag selection ---
 
   function selectionRange(): { start: Date; end: Date } | null {
-    if (!dragStart || !dragEnd) return null;
+    if (!dragStart || !dragEnd) {return null;}
     return dragStart <= dragEnd
       ? { start: dragStart, end: dragEnd }
       : { start: dragEnd, end: dragStart };
@@ -91,7 +93,7 @@
 
   function isSelected(day: Date): boolean {
     const range = selectionRange();
-    if (!range) return false;
+    if (!range) {return false;}
     const d = day.getTime();
     return d >= range.start.getTime() && d <= range.end.getTime();
   }
@@ -104,7 +106,7 @@
 
   function handleGridPointerDown(e: PointerEvent) {
     const day = dateFromElement(e.target as Element);
-    if (!day) return;
+    if (!day) {return;}
     isDragging = true;
     dragStart = day;
     dragEnd = day;
@@ -112,20 +114,21 @@
   }
 
   function handleGridPointerMove(e: PointerEvent) {
-    if (!isDragging) return;
+    if (!isDragging) {return;}
     // Use elementFromPoint so touch drag works too
     const el = document.elementFromPoint(e.clientX, e.clientY);
     const day = dateFromElement(el);
-    if (day) dragEnd = day;
+    if (day) {dragEnd = day;}
   }
 
-  function handleGridPointerUp(_e: PointerEvent) {
-    if (!isDragging) return;
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  function handleGridPointerUp(_event: PointerEvent) {
+    if (!isDragging) {return;}
     commitSelection();
   }
 
   function handleWindowPointerUp() {
-    if (isDragging) commitSelection();
+    if (isDragging) {commitSelection();}
   }
 
   function commitSelection() {
@@ -143,19 +146,23 @@
 
 <div class="bg-white rounded-xl shadow-sm overflow-hidden">
   <div class="flex items-center justify-between p-4 border-b border-gray-100">
-    <button onclick={prevMonth} class="p-2 hover:bg-gray-100 rounded-lg transition-colors">←</button>
+    <button
+      onclick={prevMonth}
+      class="p-2 hover:bg-gray-100 rounded-lg transition-colors">←</button>
     <div class="text-center">
       <h2 class="text-lg font-semibold text-gray-900">
         {getMonthName(currentMonth, $locale || 'pt')} {currentYear}
       </h2>
     </div>
-    <button onclick={nextMonth} class="p-2 hover:bg-gray-100 rounded-lg transition-colors">→</button>
+    <button
+      onclick={nextMonth}
+      class="p-2 hover:bg-gray-100 rounded-lg transition-colors">→</button>
   </div>
   
   <!-- svelte-ignore a11y_no_static_element_interactions -->
   <div
     class="grid grid-cols-7 gap-px bg-gray-200 p-2 select-none"
-    style="touch-action: none;"
+    style:touch-action="none"
     onpointerdown={handleGridPointerDown}
     onpointermove={handleGridPointerMove}
     onpointerup={handleGridPointerUp}

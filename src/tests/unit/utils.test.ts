@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+
+import type { Entry, Holiday } from '$lib/types';
 import {
   generateId,
   formatDate,
@@ -18,7 +20,6 @@ import {
   getDayName,
   getDaysUsed
 } from '$lib/utils';
-import type { Entry, Holiday } from '$lib/types';
 
 describe('utils', () => {
   describe('generateId', () => {

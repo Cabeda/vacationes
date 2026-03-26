@@ -8,7 +8,7 @@ export async function fetchNationalHolidays(year: number): Promise<Holiday[]> {
     if (!response.ok) {
       throw new Error(`Failed to fetch holidays: ${response.status}`);
     }
-    return await response.json();
+    return (await response.json()) as Holiday[];
   } catch (error) {
     console.error('Error fetching national holidays:', error);
     return [];
@@ -66,7 +66,7 @@ export async function getHolidaysForYear(
   municipality: string,
   cachedHolidays: Record<number, Holiday[]>
 ): Promise<Holiday[]> {
-  if (cachedHolidays[year]) {
+  if (year in cachedHolidays) {
     return addMunicipalHolidays(cachedHolidays[year], municipality);
   }
   

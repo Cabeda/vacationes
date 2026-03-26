@@ -7,7 +7,10 @@ export function calculateBalance(
   leaveTypes: Record<string, LeaveType>,
   entries: Entry[]
 ): BalanceInfo {
-  const allowance = profile.leaveBalances[leaveType.id] ?? leaveType.annualAllowance ?? -1;
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
+  const allowance = profile.leaveBalances[leaveType.id] !== undefined
+    ? profile.leaveBalances[leaveType.id]
+    : (leaveType.annualAllowance ?? -1);
   
   const relevantEntries = Object.values(entries).filter(
     e => e.personId === profile.id && e.leaveTypeId === leaveType.id
@@ -15,9 +18,7 @@ export function calculateBalance(
   
   let used = 0;
   for (const entry of relevantEntries) {
-    if (entry.status === 'completed' || entry.status === 'confirmed' || entry.status === 'planned') {
-      used += getDateRange(entry.startDate, entry.endDate, entry.halfDay);
-    }
+    used += getDateRange(entry.startDate, entry.endDate, entry.halfDay);
   }
   
   const deductingTypes = Object.values(leaveTypes).filter(lt => lt.deductsFrom === leaveType.id);
@@ -59,7 +60,7 @@ export function getEntriesForDateRange(
   const end = parseDate(endDate);
   
   return Object.values(entries).filter(entry => {
-    if (entry.personId !== personId) return false;
+    if (entry.personId !== personId) {return false;}
     
     const entryStart = parseDate(entry.startDate);
     const entryEnd = parseDate(entry.endDate);

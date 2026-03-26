@@ -1,5 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
+
   import type { LeaveType } from '$lib/types';
   
   interface Props {
@@ -9,7 +10,7 @@
     onchange: (id: string) => void;
   }
   
-  let { leaveTypes, selectedId, locale, onchange }: Props = $props();
+  const { leaveTypes, selectedId, locale, onchange }: Props = $props();
 </script>
 
 <div>

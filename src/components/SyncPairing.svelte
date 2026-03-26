@@ -1,6 +1,7 @@
 <script lang="ts">
+  import { onMount, tick } from 'svelte';
   import { _ } from 'svelte-i18n';
-  import { onMount } from 'svelte';
+
   import type { PairedDevice } from '$lib/types';
   
   type PairingStep = 'idle' | 'generating' | 'waiting-scan' | 'scanning' | 'connecting' | 'connected';
@@ -12,7 +13,7 @@
   let peerConnection = $state<RTCPeerConnection | null>(null);
   let dataChannel = $state<RTCDataChannel | null>(null);
   let scannerElement = $state<HTMLElement | null>(null);
-  let html5QrCodeScanner = $state<any>(null);
+  let html5QrCodeScanner = $state<Record<string, unknown> | null>(null);
   let sdpOffer = $state<string | null>(null);
   
   const STUN_SERVERS = [{ urls: 'stun:stun.l.google.com:19302' }];
@@ -65,7 +66,7 @@
       await peerConnection.setLocalDescription(offer);
       
       await new Promise<void>((resolve) => {
-        if (!peerConnection) return resolve();
+        if (!peerConnection) {return resolve();}
         peerConnection!.onicegatheringstatechange = () => {
           if (peerConnection!.iceGatheringState === 'complete') {
             resolve();
@@ -85,7 +86,7 @@
   }
   
   async function handleScannedQR(result: string) {
-    if (!scannerElement) return;
+    if (!scannerElement) {return;}
     
     try {
       const parsed = JSON.parse(result);
@@ -155,7 +156,7 @@
   }
   
   function setupDataChannel() {
-    if (!dataChannel) return;
+    if (!dataChannel) {return;}
     
     dataChannel.onopen = () => {
       step = 'connected';
@@ -167,7 +168,7 @@
     };
     
     dataChannel.onmessage = (event) => {
-      console.log('Received data:', event.data);
+      console.warn('Received data:', event.data);
     };
     
     dataChannel.onerror = (err) => {
@@ -192,7 +193,14 @@
     step = 'scanning';
     error = null;
     
-    if (!scannerElement) return;
+    await tick();
+    await tick();
+    
+    if (!scannerElement) {
+      error = 'Camera element not found';
+      step = 'idle';
+      return;
+    }
     
     try {
       const { Html5Qrcode } = await import('html5-qrcode');
@@ -265,7 +273,10 @@
         {step === 'waiting-scan' ? $_('sync.step4') : $_('sync.step5')}
       </p>
       <div class="bg-white rounded-xl p-4 inline-block shadow-sm">
-        <img src={qrCodeUrl} alt="QR Code" class="w-64 h-64 mx-auto" />
+        <img
+          src={qrCodeUrl}
+          alt="QR Code"
+          class="w-64 h-64 mx-auto" />
       </div>
       <button
         onclick={cancelPairing}
@@ -277,7 +288,10 @@
   {:else if step === 'scanning'}
     <div class="text-center space-y-4">
       <p class="text-sm text-gray-600">{$_('sync.scanning')}</p>
-      <div id="qr-reader" bind:this={scannerElement} class="bg-gray-100 rounded-xl overflow-hidden"></div>
+      <div
+        id="qr-reader"
+        bind:this={scannerElement}
+        class="bg-gray-100 rounded-xl overflow-hidden"></div>
       <button
         onclick={cancelPairing}
         class="text-sm text-gray-500 hover:text-gray-700"

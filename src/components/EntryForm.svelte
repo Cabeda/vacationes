@@ -1,10 +1,12 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
-  import { locale } from '$lib/i18n';
   import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+
   import { vacationesDoc, initializeDoc, updateDoc } from '$lib/automerge';
+  import { locale } from '$lib/i18n';
   import type { Entry, LeaveType, Profile } from '$lib/types';
   import { generateId, formatDate } from '$lib/utils';
+
   import LeaveTypePicker from './LeaveTypePicker.svelte';
   
   let loading = $state(true);
@@ -23,16 +25,16 @@
   let saving = $state(false);
   let error = $state<string | null>(null);
   
-  let doc = $derived($vacationesDoc);
-  let profiles = $derived(doc ? Object.values(doc.profiles) : [] as Profile[]);
-  let leaveTypes = $derived(doc ? Object.values(doc.leaveTypes).sort((a, b) => a.order - b.order) : [] as LeaveType[]);
+  const doc = $derived($vacationesDoc);
+  const profiles = $derived(doc ? Object.values(doc.profiles) : [] as Profile[]);
+  const leaveTypes = $derived(doc ? Object.values(doc.leaveTypes).sort((a, b) => a.order - b.order) : [] as LeaveType[]);
   
   onMount(async () => {
     const params = new URLSearchParams(window.location.search);
     const qs = params.get('start');
     const qe = params.get('end');
-    if (qs) startDate = qs;
-    if (qe) endDate = qe;
+    if (qs) {startDate = qs;}
+    if (qe) {endDate = qe;}
     await initializeDoc();
     loading = false;
   });
@@ -53,7 +55,7 @@
   
   async function handleSubmit(e: Event) {
     e.preventDefault();
-    if (!doc || !selectedPersonId) return;
+    if (!doc || !selectedPersonId) {return;}
     
     saving = true;
     error = null;
@@ -98,7 +100,9 @@
   }
 </script>
 
-<form onsubmit={handleSubmit} class="space-y-4">
+<form
+  onsubmit={handleSubmit}
+  class="space-y-4">
   {#if loading}
     <p class="text-gray-500">{$_('common.loading')}</p>
   {:else}

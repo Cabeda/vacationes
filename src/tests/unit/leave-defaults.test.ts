@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { DEFAULT_LEAVE_TYPES, PORTUGAL_MUNICIPALITIES } from '$lib/leave-defaults';
 
 describe('leave-defaults', () => {

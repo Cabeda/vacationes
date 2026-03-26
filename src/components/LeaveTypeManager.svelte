@@ -1,5 +1,6 @@
 <script lang="ts">
   import { _ } from 'svelte-i18n';
+
   import { getRepo } from '$lib/automerge';
   import type { LeaveType } from '$lib/types';
   import { generateId } from '$lib/utils';
@@ -9,7 +10,7 @@
     locale: string;
   }
   
-  let { leaveTypes, locale }: Props = $props();
+  const { leaveTypes, locale }: Props = $props();
   
   let showAddForm = $state(false);
   
@@ -24,7 +25,7 @@
   async function handleSave() {
     const repo = getRepo();
     const docHandle = repo.find(['vacationes']);
-    if (!docHandle) return;
+    if (!docHandle) {return;}
     
     const newType: LeaveType = {
       id: generateId(),
@@ -58,11 +59,11 @@
   
   async function deleteLeaveType(id: string) {
     const lt = leaveTypes.find(t => t.id === id);
-    if (lt?.isDefault) return;
+    if (lt?.isDefault) {return;}
     
     const repo = getRepo();
     const docHandle = repo.find(['vacationes']);
-    if (!docHandle) return;
+    if (!docHandle) {return;}
     
     docHandle.change((d) => {
       delete d.leaveTypes[id];
@@ -71,11 +72,11 @@
   
   async function toggleHalfDay(id: string) {
     const lt = leaveTypes.find(t => t.id === id);
-    if (!lt) return;
+    if (!lt) {return;}
     
     const repo = getRepo();
     const docHandle = repo.find(['vacationes']);
-    if (!docHandle) return;
+    if (!docHandle) {return;}
     
     docHandle.change((d) => {
       if (d.leaveTypes[id]) {
@@ -184,7 +185,8 @@
       <div class="bg-white rounded-lg p-3 flex items-center gap-3">
         <div
           class="w-10 h-10 rounded-lg flex items-center justify-center text-xl"
-          style="background-color: {lt.color}20; color: {lt.color}"
+          style:background-color="{lt.color}20"
+          style:color={lt.color}
         >
           {lt.icon}
         </div>

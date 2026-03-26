@@ -1,18 +1,20 @@
 <script lang="ts">
-  import { _ } from 'svelte-i18n';
-  import { locale } from '$lib/i18n';
   import { onMount } from 'svelte';
+  import { _ } from 'svelte-i18n';
+
   import { vacationesDoc, initializeDoc, updateDoc } from '$lib/automerge';
+  import { locale } from '$lib/i18n';
   import { PORTUGAL_MUNICIPALITIES } from '$lib/leave-defaults';
   import type { Profile } from '$lib/types';
-  import LeaveTypeManager from './LeaveTypeManager.svelte';
+
   import LanguageToggle from './LanguageToggle.svelte';
+  import LeaveTypeManager from './LeaveTypeManager.svelte';
   
   let profiles = $state<Profile[]>([]);
   let loading = $state(true);
   let activeTab = $state<'profiles' | 'leaveTypes' | 'general'>('profiles');
   
-  let doc = $derived($vacationesDoc);
+  const doc = $derived($vacationesDoc);
   
   onMount(async () => {
     await initializeDoc();
@@ -26,7 +28,7 @@
   });
   
   function updateProfile(profileId: string, updates: Partial<Profile>) {
-    if (!doc) return;
+    if (!doc) {return;}
     
     updateDoc((d) => {
       if (d.profiles[profileId]) {
@@ -36,7 +38,7 @@
   }
   
   function exportData() {
-    if (!doc) return;
+    if (!doc) {return;}
     const dataStr = JSON.stringify(doc, null, 2);
     const blob = new Blob([dataStr], { type: 'application/json' });
     const url = URL.createObjectURL(blob);
@@ -49,6 +51,11 @@
 </script>
 
 <div class="space-y-4">
+  <div class="bg-white rounded-xl shadow-sm p-4">
+    <h3 class="font-medium text-gray-900 mb-3">{$_('settings.language')}</h3>
+    <LanguageToggle />
+  </div>
+
   <div class="flex border-b border-gray-200">
     <button
       onclick={() => activeTab = 'profiles'}
@@ -79,7 +86,7 @@
           <div class="flex items-center gap-3">
             <div
               class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
-              style="background-color: {profile.color}"
+              style:background-color={profile.color}
             >
               {profile.name.charAt(0).toUpperCase()}
             </div>

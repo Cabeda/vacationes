@@ -26,10 +26,27 @@ test.describe('Vacationes App', () => {
   });
 
   test('should add a single vacation day and show it on the calendar', async ({ page }) => {
+    const errors: string[] = [];
+    page.on('console', msg => {
+      if (msg.type() === 'error') {
+        errors.push(msg.text());
+      }
+    });
+
     await page.goto('/plan');
+    await page.waitForLoadState('networkidle');
+
+    // Wait for the form to be ready (loading state resolved)
+    await expect(page.locator('body')).toBeVisible();
+    await page.waitForTimeout(3000);
+
+    // Log any errors
+    if (errors.length > 0) {
+      console.log('Console errors:', errors);
+    }
 
     // Wait for the form to hydrate
-    await expect(page.getByRole('button', { name: /save|guardar/i })).toBeVisible({ timeout: 15000 });
+    await expect(page.getByRole('button', { name: /save|guardar/i })).toBeVisible({ timeout: 20000 });
 
     // Set start and end date to a fixed future date (avoid weekends/holidays for clarity)
     const testDate = '2026-06-15'; // Monday

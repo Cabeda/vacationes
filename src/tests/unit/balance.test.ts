@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+
 import { calculateBalance, calculateAllBalances, canTakeLeave, getWorkingDays, getEntriesForDateRange } from '$lib/balance';
 import type { Profile, LeaveType, Entry } from '$lib/types';
 
@@ -81,14 +82,14 @@ describe('balance', () => {
   
   describe('calculateBalance', () => {
     it('should calculate correct balance with no entries', () => {
-      const result = calculateBalance(mockProfile, mockLeaveTypes['ferias'], mockLeaveTypes, []);
+      const result = calculateBalance(mockProfile, mockLeaveTypes.ferias, mockLeaveTypes, []);
       expect(result.allowance).toBe(22);
       expect(result.used).toBe(0);
       expect(result.remaining).toBe(22);
     });
     
     it('should calculate correct balance with entries', () => {
-      const result = calculateBalance(mockProfile, mockLeaveTypes['ferias'], mockLeaveTypes, Object.values(mockEntries));
+      const result = calculateBalance(mockProfile, mockLeaveTypes.ferias, mockLeaveTypes, Object.values(mockEntries));
       expect(result.allowance).toBe(22);
       expect(result.used).toBe(5);
       expect(result.remaining).toBe(17);
@@ -113,13 +114,13 @@ describe('balance', () => {
         }
       ];
       
-      const result = calculateBalance(mockProfile, mockLeaveTypes['ferias'], mockLeaveTypes, entriesWithHalfDay);
+      const result = calculateBalance(mockProfile, mockLeaveTypes.ferias, mockLeaveTypes, entriesWithHalfDay);
       expect(result.used).toBe(5.5);
       expect(result.remaining).toBe(16.5);
     });
     
     it('should handle unlimited leave types', () => {
-      const result = calculateBalance(mockProfile, mockLeaveTypes['baixa'], mockLeaveTypes, Object.values(mockEntries));
+      const result = calculateBalance(mockProfile, mockLeaveTypes.baixa, mockLeaveTypes, Object.values(mockEntries));
       expect(result.allowance).toBe(0);
       expect(result.used).toBe(0);
     });
@@ -133,7 +134,7 @@ describe('balance', () => {
         }
       };
       
-      const result = calculateBalance(profileWithCustom, mockLeaveTypes['ferias'], mockLeaveTypes, []);
+      const result = calculateBalance(profileWithCustom, mockLeaveTypes.ferias, mockLeaveTypes, []);
       expect(result.allowance).toBe(25);
     });
   });

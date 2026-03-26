@@ -53,10 +53,10 @@ export function getEntriesInMonth(entries: Entry[], year: number, month: number)
     const entryYear = start.getFullYear();
     const entryMonth = start.getMonth();
     
-    if (entryYear === year && entryMonth === month) return true;
-    if (entryYear === year && end.getMonth() === month && end.getFullYear() === year) return true;
-    if (entryYear <= year && end.getMonth() >= month && end.getFullYear() === year) return true;
-    if (entryYear <= year && start.getMonth() <= month && end.getFullYear() >= year) return true;
+    if (entryYear === year && entryMonth === month) {return true;}
+    if (entryYear === year && end.getMonth() === month && end.getFullYear() === year) {return true;}
+    if (entryYear <= year && end.getMonth() >= month && end.getFullYear() === year) {return true;}
+    if (entryYear <= year && start.getMonth() <= month && end.getFullYear() >= year) {return true;}
     
     return false;
   });
@@ -103,7 +103,7 @@ export function getMonthDays(year: number, month: number): Date[] {
 }
 
 export function normalizeLocale(locale: string | null | undefined): 'pt' | 'en' {
-  if (!locale) return 'pt';
+  if (!locale) {return 'pt';}
   return locale.startsWith('en') ? 'en' : 'pt';
 }
 
