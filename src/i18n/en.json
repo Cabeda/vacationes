@@ -1,0 +1,136 @@
+{
+  "app": {
+    "title": "Vacationes",
+    "tagline": "Vacation and Leave Management"
+  },
+  "nav": {
+    "calendar": "Calendar",
+    "add": "Add",
+    "sync": "Sync",
+    "settings": "Settings"
+  },
+  "calendar": {
+    "today": "Today",
+    "year": "Year",
+    "month": "Month",
+    "noEntries": "No entries for this month",
+    "vacationDays": "vacation days",
+    "daysRemaining": "days remaining",
+    "daysUsed": "days used"
+  },
+  "entry": {
+    "title": "Leave Entry",
+    "add": "Add Entry",
+    "edit": "Edit Entry",
+    "delete": "Delete Entry",
+    "deleteConfirm": "Are you sure you want to delete this entry?",
+    "person": "Person",
+    "leaveType": "Leave Type",
+    "startDate": "Start Date",
+    "endDate": "End Date",
+    "halfDay": "Half Day",
+    "halfDayMorning": "Morning",
+    "halfDayAfternoon": "Afternoon",
+    "label": "Description",
+    "notes": "Notes",
+    "destination": "Destination",
+    "budget": "Budget",
+    "status": "Status",
+    "statusPlanned": "Planned",
+    "statusConfirmed": "Confirmed",
+    "statusCompleted": "Completed",
+    "save": "Save",
+    "cancel": "Cancel"
+  },
+  "leaveTypes": {
+    "title": "Leave Types",
+    "add": "Add Type",
+    "edit": "Edit Type",
+    "name": "Name",
+    "namePt": "Name (PT)",
+    "nameEn": "Name (EN)",
+    "color": "Color",
+    "icon": "Emoji",
+    "annualAllowance": "Annual Days",
+    "annualAllowanceUnlimited": "Unlimited",
+    "halfDayAllowed": "Allows Half Day",
+    "deductsFrom": "Deducts From",
+    "deductsFromNone": "None",
+    "isDefault": "Default Type",
+    "order": "Order"
+  },
+  "profile": {
+    "title": "Profile",
+    "name": "Name",
+    "municipality": "Municipality",
+    "color": "Color",
+    "leaveBalances": "Leave Balances",
+    "defaultAllowance": "Default",
+    "customAllowance": "Custom"
+  },
+  "settings": {
+    "title": "Settings",
+    "language": "Language",
+    "year": "Year",
+    "holidays": "Holidays",
+    "holidaysNational": "National Holidays",
+    "holidaysMunicipal": "Municipal Holidays",
+    "exportData": "Export Data",
+    "importData": "Import Data",
+    "clearData": "Clear Data",
+    "clearDataConfirm": "Are you sure? This action cannot be undone."
+  },
+  "sync": {
+    "title": "Synchronization",
+    "pairNew": "Pair New Device",
+    "scanToPair": "Scan QR Code to Pair",
+    "showQR": "Show QR Code",
+    "scanning": "Scanning...",
+    "connected": "Connected",
+    "disconnected": "Disconnected",
+    "lastConnected": "Last Connected",
+    "pairedDevices": "Paired Devices",
+    "noDevices": "No paired devices",
+    "step1": "Device A: Tap 'Show QR Code' and wait",
+    "step2": "Device B: Tap 'Scan QR Code' and scan the code",
+    "step3": "Device A: Confirm the connection on your device",
+    "step4": "Device A: Show QR Code to Device B",
+    "step5": "Device B: Wait for QR Code and scan it",
+    "step6": "Device A: Confirm the connection on Device B"
+  },
+  "balance": {
+    "title": "Balances",
+    "used": "Used",
+    "remaining": "Remaining",
+    "allowance": "Total",
+    "of": "of"
+  },
+  "holidays": {
+    "title": "Holidays",
+    "national": "National",
+    "municipal": "Municipal",
+    "add": "Add Holiday",
+    "manual": "Add manually",
+    "todayIsHoliday": "Today is {name}"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "close": "Close",
+    "confirm": "Confirm",
+    "yes": "Yes",
+    "no": "No",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success",
+    "noData": "No data",
+    "selectOption": "Select an option"
+  },
+  "municipalities": {
+    "lisboa": "Lisbon",
+    "porto": "Porto"
+  }
+}

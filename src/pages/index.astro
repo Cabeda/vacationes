@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Calendar from '../components/Calendar.svelte';
+import Nav from '../components/Nav.svelte';
+import BalanceOverview from '../components/BalanceOverview.svelte';
+---
+
+<Layout title="Vacationes - Calendário">
+  <main class="pb-20">
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="max-w-md mx-auto px-4 py-4">
+        <h1 class="text-2xl font-bold text-gray-900">Vacationes</h1>
+        <p class="text-sm text-gray-500">Gestão de Férias e Licenças</p>
+      </div>
+    </header>
+    
+    <div class="max-w-md mx-auto px-4 py-4">
+      <BalanceOverview client:only="svelte" />
+      <Calendar client:only="svelte" />
+    </div>
+    
+    <Nav client:only="svelte" currentPage="calendar" />
+  </main>
+</Layout>

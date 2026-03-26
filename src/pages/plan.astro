@@ -1,0 +1,21 @@
+---
+import Layout from '../layouts/Layout.astro';
+import EntryForm from '../components/EntryForm.svelte';
+import Nav from '../components/Nav.svelte';
+---
+
+<Layout title="Vacationes - Adicionar">
+  <main class="pb-20">
+    <header class="bg-white shadow-sm sticky top-0 z-10">
+      <div class="max-w-md mx-auto px-4 py-4">
+        <h1 class="text-2xl font-bold text-gray-900">Adicionar Registo</h1>
+      </div>
+    </header>
+    
+    <div class="max-w-md mx-auto px-4 py-4">
+      <EntryForm client:only="svelte" />
+    </div>
+    
+    <Nav client:only="svelte" currentPage="add" />
+  </main>
+</Layout>

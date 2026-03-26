@@ -1,0 +1,136 @@
+{
+  "app": {
+    "title": "Vacationes",
+    "tagline": "Gestão de Férias e Licenças"
+  },
+  "nav": {
+    "calendar": "Calendário",
+    "add": "Adicionar",
+    "sync": "Sincronizar",
+    "settings": "Definições"
+  },
+  "calendar": {
+    "today": "Hoje",
+    "year": "Ano",
+    "month": "Mês",
+    "noEntries": "Sem registos para este mês",
+    "vacationDays": "dias de férias",
+    "daysRemaining": "dias restantes",
+    "daysUsed": "dias usados"
+  },
+  "entry": {
+    "title": "Registo de Licença",
+    "add": "Adicionar Registo",
+    "edit": "Editar Registo",
+    "delete": "Eliminar Registo",
+    "deleteConfirm": "Tem a certeza que deseja eliminar este registo?",
+    "person": "Pessoa",
+    "leaveType": "Tipo de Licença",
+    "startDate": "Data de Início",
+    "endDate": "Data de Fim",
+    "halfDay": "Meio Dia",
+    "halfDayMorning": "Manhã",
+    "halfDayAfternoon": "Tarde",
+    "label": "Descrição",
+    "notes": "Notas",
+    "destination": "Destino",
+    "budget": "Orçamento",
+    "status": "Estado",
+    "statusPlanned": "Planeado",
+    "statusConfirmed": "Confirmado",
+    "statusCompleted": "Concluído",
+    "save": "Guardar",
+    "cancel": "Cancelar"
+  },
+  "leaveTypes": {
+    "title": "Tipos de Licença",
+    "add": "Adicionar Tipo",
+    "edit": "Editar Tipo",
+    "name": "Nome",
+    "namePt": "Nome (PT)",
+    "nameEn": "Nome (EN)",
+    "color": "Cor",
+    "icon": "Emoji",
+    "annualAllowance": "Dias Anuais",
+    "annualAllowanceUnlimited": "Ilimitado",
+    "halfDayAllowed": "Permite Meio Dia",
+    "deductsFrom": "Desconta de",
+    "deductsFromNone": "Nenhum",
+    "isDefault": "Tipo Pré-definido",
+    "order": "Ordem"
+  },
+  "profile": {
+    "title": "Perfil",
+    "name": "Nome",
+    "municipality": "Município",
+    "color": "Cor",
+    "leaveBalances": "Saldos de Licenças",
+    "defaultAllowance": "Por defeito",
+    "customAllowance": "Personalizado"
+  },
+  "settings": {
+    "title": "Definições",
+    "language": "Idioma",
+    "year": "Ano",
+    "holidays": "Feriados",
+    "holidaysNational": "Feriados Nacionais",
+    "holidaysMunicipal": "Feriados Municipais",
+    "exportData": "Exportar Dados",
+    "importData": "Importar Dados",
+    "clearData": "Limpar Dados",
+    "clearDataConfirm": "Tem a certeza? Esta ação não pode ser revertida."
+  },
+  "sync": {
+    "title": "Sincronização",
+    "pairNew": "Emparelhar Novo Dispositivo",
+    "scanToPair": "Ler QR Code para Emparelhar",
+    "showQR": "Mostrar QR Code",
+    "scanning": "A Ler...",
+    "connected": "Ligado",
+    "disconnected": "Desligado",
+    "lastConnected": "Última Ligação",
+    "pairedDevices": "Dispositivos Emparelhados",
+    "noDevices": "Nenhum dispositivo emparelhado",
+    "step1": "Dispositivo A: Toque em 'Mostrar QR Code' e aguarde",
+    "step2": "Dispositivo B: Toque em 'Ler QR Code' e leia o código",
+    "step3": "Dispositivo A: Confirme a ligação no seu dispositivo",
+    "step4": "Dispositivo A: Mostre o QR Code ao Dispositivo B",
+    "step5": "Dispositivo B: Aguarde pelo QR Code e leia-o",
+    "step6": "Dispositivo A: Confirme a ligação no Dispositivo B"
+  },
+  "balance": {
+    "title": "Saldos",
+    "used": "Usados",
+    "remaining": "Restantes",
+    "allowance": "Total",
+    "of": "de"
+  },
+  "holidays": {
+    "title": "Feriados",
+    "national": "Nacional",
+    "municipal": "Municipal",
+    "add": "Adicionar Feriado",
+    "manual": "Adicionar manualmente",
+    "todayIsHoliday": "Hoje é {name}"
+  },
+  "common": {
+    "save": "Guardar",
+    "cancel": "Cancelar",
+    "delete": "Eliminar",
+    "edit": "Editar",
+    "add": "Adicionar",
+    "close": "Fechar",
+    "confirm": "Confirmar",
+    "yes": "Sim",
+    "no": "Não",
+    "loading": "A carregar...",
+    "error": "Erro",
+    "success": "Sucesso",
+    "noData": "Sem dados",
+    "selectOption": "Selecione uma opção"
+  },
+  "municipalities": {
+    "lisboa": "Lisboa",
+    "porto": "Porto"
+  }
+}

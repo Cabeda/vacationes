@@ -1,0 +1,67 @@
+{
+  "name": "vacationes",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check",
+    "lint": "eslint src --ext .ts,.svelte",
+    "lint:fix": "eslint src --ext .ts,.svelte --fix",
+    "typecheck": "astro check && tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@astrojs/svelte": "^7.0.0",
+    "@automerge/automerge-repo": "^2.5.4",
+    "@automerge/automerge-repo-network-broadcastchannel": "^2.5.4",
+    "@automerge/automerge-repo-storage-indexeddb": "^2.5.4",
+    "@automerge/automerge-repo-svelte-store": "^2.5.4",
+    "astro": "^5.0.0",
+    "html5-qrcode": "^2.3.8",
+    "qrcode": "^1.5.4",
+    "svelte": "^5.0.0",
+    "svelte-i18n": "^4.0.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.8",
+    "@astrojs/vercel": "^8.2.11",
+    "@eslint/js": "^9.0.0",
+    "@playwright/test": "^1.45.0",
+    "@tailwindcss/vite": "^4.2.2",
+    "@testing-library/jest-dom": "^6.4.0",
+    "@testing-library/svelte": "^5.0.0",
+    "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.0",
+    "@vitest/coverage-v8": "^2.0.0",
+    "automerge": "1.0.1-preview.7",
+    "eslint": "^9.0.0",
+    "eslint-plugin-svelte": "^2.40.0",
+    "husky": "^9.0.0",
+    "jsdom": "^25.0.0",
+    "lint-staged": "^15.0.0",
+    "svelte-eslint-parser": "^1.6.0",
+    "tailwindcss": "^4.0.0",
+    "typescript": "^5.6.0",
+    "typescript-eslint": "^8.0.0",
+    "vite-plugin-top-level-await": "^1.4.0",
+    "vite-plugin-wasm": "^3.3.0",
+    "vitest": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.{ts,svelte}": [
+      "eslint --fix",
+      "vitest related --run"
+    ],
+    "*.ts": [
+      "tsc --noEmit"
+    ]
+  }
+}

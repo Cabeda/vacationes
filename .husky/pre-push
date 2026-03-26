@@ -1,0 +1,30 @@
+#!/bin/sh
+. "$(dirname "$0")/_/husky.sh"
+
+echo "Running pre-push checks..."
+
+pnpm test
+if [ $? -ne 0 ]; then
+  echo "Tests failed!"
+  exit 1
+fi
+
+pnpm test:coverage
+if [ $? -ne 0 ]; then
+  echo "Coverage check failed! Coverage must be >90%"
+  exit 1
+fi
+
+pnpm lint
+if [ $? -ne 0 ]; then
+  echo "Lint check failed!"
+  exit 1
+fi
+
+pnpm typecheck
+if [ $? -ne 0 ]; then
+  echo "Type check failed!"
+  exit 1
+fi
+
+echo "All pre-push checks passed!"
