@@ -217,11 +217,14 @@
       
       html5QrCodeScanner = new Html5Qrcode('qr-reader');
       
+      // eslint-disable-next-line no-console
+      console.log('Starting camera...');
+      
       await html5QrCodeScanner.start(
         { facingMode: 'environment' },
         {
           fps: 10,
-          qrbox: { width: 250, height: 250 }
+          qrbox: { width: 200, height: 200 }
         },
         (decodedText) => {
           // eslint-disable-next-line no-console
@@ -230,7 +233,11 @@
         },
         () => {}
       );
+      
+      // eslint-disable-next-line no-console
+      console.log('Camera started - waiting for QR code');
     } catch (err) {
+      console.error('Camera error:', err);
       error = err instanceof Error ? err.message : 'Failed to start camera. Please ensure camera permissions are granted.';
       step = 'idle';
     }
